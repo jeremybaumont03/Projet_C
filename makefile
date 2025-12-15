@@ -1,17 +1,27 @@
+# Makefile pour BigDigits - ESIEA
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -O2
+CFLAGS = -Wall -Wextra -g -I.
 
-SRC = main.c bigbinary.c pgcd.c modexp.c RSA.c
-OBJ = $(SRC:.c=.o)
-EXEC = projet
+# Nom de l'exécutable
+TARGET = BigDigitsApp
 
-all: $(EXEC)
+# Sources et Objets
+SRCS = main.c bigbinary.c multiplication.c pgcd.c modexp.c RSA.c
+OBJS = $(SRCS:.c=.o)
 
-$(EXEC): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ)
+# Règle principale
+$(TARGET): $(OBJS)
+	@echo "Creating executable..."
+	$(CC) $(OBJS) -o $(TARGET)
+	@echo "Done! Run using ./$(TARGET)"
 
+# Compilation des .c
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Nettoyage
 clean:
-	rm -f $(OBJ) $(EXEC)
+	rm -f $(OBJS) $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)

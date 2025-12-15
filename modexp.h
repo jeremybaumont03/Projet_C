@@ -1,10 +1,10 @@
 #ifndef MODEXP_H
 #define MODEXP_H
-
 #include "bigbinary.h"
+#include "multiplication.h" // Nécessaire pour le modulo et l'exp
 
-// modexp: calcule (base^exp) mod mod
-// exp is an unsigned long long (fits the course constraint)
-BigBinary bb_modexp(BigBinary base, unsigned long long exp, BigBinary mod);
+// Phase 2 : Arithmétique Modulaire
+BigBinary Modulo(BigBinary A, BigBinary N);
+BigBinary ExponentiationRapideModulaire(BigBinary A, unsigned int e, BigBinary N);
 
 #endif
