@@ -14,6 +14,9 @@ typedef struct {
 
 BigBinary initBigBinary(int taille, int signe);
 BigBinary creerBigBinaryDepuisChaine(const char *chaine);
+// NOUVEAU : Fonction pour convertir un entier normal en BigBinary
+BigBinary creerBigBinaryDepuisEntier(unsigned long long n); 
+
 void libereBigBinary(BigBinary *nb);
 void afficheBigBinary(BigBinary nb);
 BigBinary copieBigBinary(BigBinary A);

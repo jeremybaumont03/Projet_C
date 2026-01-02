@@ -54,21 +54,40 @@ BigBinary copieBigBinary(BigBinary A) {
     return copie;
 }
 
+// NOUVEAU : Conversion Decimal -> Binaire pour le projet
+BigBinary creerBigBinaryDepuisEntier(unsigned long long n) {
+    if (n == 0) return initBigBinary(0, 0);
+
+    // Un unsigned long long fait max 64 bits
+    int tempBits[64];
+    int count = 0;
+
+    // Conversion en binaire (on obtient les bits à l'envers : LSB en premier)
+    while (n > 0) {
+        tempBits[count++] = n % 2;
+        n /= 2;
+    }
+
+    // On crée le BigBinary (MSB en premier)
+    BigBinary res = initBigBinary(count, 1);
+    for (int i = 0; i < count; i++) {
+        res.Tdigits[i] = tempBits[count - 1 - i]; // On inverse
+    }
+    return res;
+}
+
 BigBinary creerBigBinaryDepuisChaine(const char *chaine) {
     int len = strlen(chaine);
     int start = 0;
-    
-    // On saute les caractères bizarres au début pour trouver le premier 1
     while (start < len && chaine[start] != '1') start++;
 
     if (start == len) return initBigBinary(0, 0);
 
     BigBinary nb = initBigBinary(len - start, 1);
     for (int i = 0; i < nb.Taille; i++) {
-        // CORRECTION DU BUG ICI : On s'assure que c'est bien 0 ou 1
         char c = chaine[start + i];
         if (c == '1') nb.Tdigits[i] = 1;
-        else nb.Tdigits[i] = 0; // Tout ce qui n'est pas '1' devient '0'
+        else nb.Tdigits[i] = 0;
     }
     return nb;
 }
