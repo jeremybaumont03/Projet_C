@@ -63,7 +63,7 @@ void afficher_resultat(const char* titre, BigBinary nb) {
 
 // Fonction intelligente de lecture : Détecte automatiquement si l'entrée est Décimale ou Binaire
 BigBinary lire_input(const char* nom) {
-    char buffer[4096]; // Buffer large pour accepter de grands nombres
+    char buffer[256]; // Buffer large pour accepter de grands nombres
     printf("  > %s (dec/bin) : ", nom);
     scanf("%s", buffer);
 
